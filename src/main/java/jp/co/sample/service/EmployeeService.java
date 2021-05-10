@@ -27,4 +27,13 @@ public class EmployeeService {
 	public List<Employee> showList() {
 		return employeeRepository.findAll();
 	}
+	
+	/**
+	 * 主キーにより1人分の従業員情報を取得するメソッド
+	 * @param id
+	 * @return Employee
+	 */
+	public Employee showDetail(Integer id) {
+		return employeeRepository.load(id);
+	}
 }
