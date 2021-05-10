@@ -39,7 +39,7 @@ public class AdministratorController {
 	}
 	/**
 	 * LoginForm をインスタンス化するメソッド
-	 * @return　LoginForm
+	 * @return　LoginFormを返す
 	 */
 	@ModelAttribute
 	public LoginForm setUpLoginForm() {
@@ -48,7 +48,7 @@ public class AdministratorController {
 	
 	/**
 	 * 「administrator/login.html」にフォワードするクラス
-	 * @return administrator/login.html
+	 * @return administrator/login.html呼び出し
 	 */
 	@RequestMapping ("/")
 	public String toLogin() {
@@ -59,7 +59,7 @@ public class AdministratorController {
 	 * 入力情報からログインを行うメソッド
 	 * @param loginForm
 	 * @param model
-	 * @return forward:/employee/showList
+	 * @return forward:/employee/showList呼び出し
 	 */
 	@RequestMapping ("/login")
 	public String login(LoginForm loginForm, Model model) {
@@ -78,7 +78,7 @@ public class AdministratorController {
 	
 	/**
 	 * 「administrator/insert.html」にフォワードするメソッド
-	 * @return administrator/insert.html
+	 * @return administrator/insert.html呼び出し
 	 */
 	@RequestMapping ("/toInsert")
 	public String toInsert() {
@@ -94,6 +94,16 @@ public class AdministratorController {
 		Administrator administrator = new Administrator();
 		BeanUtils.copyProperties(insertAdministratorForm, administrator);
 		AdministratorService.insert(administrator);
+		return "redirect:/";
+	}
+	
+	/**
+	 * ログアウト処理するクラス
+	 * @return ログイン画面呼び出し
+	 */
+	@RequestMapping("/logout")
+	public String logout() {
+		session.invalidate();
 		return "redirect:/";
 	}
 	

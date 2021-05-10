@@ -34,7 +34,7 @@ public class EmployeeController {
 	/**
 	 * 従業員一覧を検索し、「employee/list.html」にフォワードするメソッド
 	 * @param model
-	 * @return employee/list
+	 * @return employee/list呼び出し
 	 */
 	@RequestMapping("/showList")
 	public String showList(Model model) {
@@ -54,7 +54,7 @@ public class EmployeeController {
 	/**
 	 * 従業員の扶養人数の更新処理を行うメソッド
 	 * @param updateEmployeeForm
-	 * @return /employee/showList
+	 * @return /employee/showList呼び出し
 	 */
 	@RequestMapping ("/update")
 	public String update(UpdateEmployeeForm updateEmployeeForm) {

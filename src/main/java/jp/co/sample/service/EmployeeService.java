@@ -22,7 +22,7 @@ public class EmployeeService {
 	
 	/**
 	 * EmployeeRepositoryを利用し、従業員情報を全件取得するメソッド
-	 * @return　List<Employee>
+	 * @return　リポジトリから受け取った情報をそのまま返す
 	 */
 	public List<Employee> showList() {
 		return employeeRepository.findAll();
@@ -31,7 +31,7 @@ public class EmployeeService {
 	/**
 	 * 主キーにより1人分の従業員情報を取得するメソッド
 	 * @param id
-	 * @return Employee
+	 * @return リポジトリから受け取った情報をそのまま返す
 	 */
 	public Employee showDetail(Integer id) {
 		return employeeRepository.load(id);
