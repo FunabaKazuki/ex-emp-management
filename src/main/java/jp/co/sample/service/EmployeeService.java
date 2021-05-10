@@ -10,7 +10,7 @@ import jp.co.sample.domain.Employee;
 import jp.co.sample.repository.EmployeeRepository;
 
 /**
- * 従業員情報を検索する処理を行うクラス
+ * 従業員情報を検索と更新処理を行うクラス
  * @author funaba
  *
  */
@@ -35,5 +35,13 @@ public class EmployeeService {
 	 */
 	public Employee showDetail(Integer id) {
 		return employeeRepository.load(id);
+	}
+	
+	/**
+	 * 従業員リポジトリを利用して従業員情報を更新するメソッド
+	 * @param employee
+	 */
+	public void update(Employee employee) {
+		employeeRepository.update(employee);
 	}
 }

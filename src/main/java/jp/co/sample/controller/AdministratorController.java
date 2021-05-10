@@ -94,7 +94,7 @@ public class AdministratorController {
 		Administrator administrator = new Administrator();
 		BeanUtils.copyProperties(insertAdministratorForm, administrator);
 		AdministratorService.insert(administrator);
-		return "/";
+		return "redirect:/";
 	}
 	
 }
