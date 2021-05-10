@@ -1,5 +1,8 @@
 package jp.co.sample.form;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 /**
  * 従業員情報更新時に使用するフォーム
  * @author funaba
@@ -13,6 +16,8 @@ public class UpdateEmployeeForm {
 	/**
 	 * 扶養人数
 	 */
+	@NotBlank(message = "必須項目です")
+	@Pattern(message = "数字を入力しててください",regexp = "^[0-9]+$") 
 	private String dependentsCount;
 	public String getId() {
 		return id;
