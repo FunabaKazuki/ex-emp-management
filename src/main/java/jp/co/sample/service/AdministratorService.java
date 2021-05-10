@@ -31,7 +31,7 @@ public class AdministratorService {
 	 * ログイン処理のための管理者情報をメールアドレスとパスワードから検索するメソッド
 	 * @param mailAddress
 	 * @param password
-	 * @return Administrator
+	 * @return リポジトリから受け取った情報をそのまま返す
 	 */
 	public Administrator login(String mailAddress , String password) {
 		return administratorRepository.findByMailAddressAndPassword(mailAddress, password);

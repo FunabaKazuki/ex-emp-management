@@ -25,7 +25,7 @@ public class EmployeeRepository {
 				
 		employee.setId(rs.getInt("id"));
 		employee.setName(rs.getString("name"));
-		employee.setAddress(rs.getString("image"));
+		employee.setImage(rs.getString("image"));
 		employee.setGender(rs.getString("gender"));
 		employee.setHireDate(rs.getDate("hire_date"));
 		employee.setMailAddress(rs.getString("mail_address"));
@@ -47,7 +47,7 @@ public class EmployeeRepository {
 	 * 従業員⼀覧情報を⼊社⽇順(降順)で取得
      * する(従業員が存在しない場合はサイズ 0
      * 件の従業員⼀覧を返す)
-	 * @return List<Employee>
+	 * @return 全従業員のリストを返す。
 	 */
 	public List<Employee> findAll() {
 		String sql = "SELECT * FROM employees "
@@ -62,7 +62,7 @@ public class EmployeeRepository {
      * が存在しない場合は Spring が自動的に例
      * 外を発生します)。
 	 * @param id
-	 * @return Employee
+	 * @return 検索した１人分の従業員情報を返す。
 	 */
 	public Employee load(Integer id) {
 		String sql =  "SELECT * FROM employees "

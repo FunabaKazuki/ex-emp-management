@@ -47,7 +47,7 @@ public class AdministratorRepository {
 	 * 　該当する管理者存在しなかったらnullを返す
 	 * @param mailAddress
 	 * @param password
-	 * @return　administrator
+	 * @return　該当する管理者情報が存在すれば管理者情報を返す。該当する管理者情報がなければNULLを返す。
 	 */
 	public Administrator findByMailAddressAndPassword(String mailAddress, String password) {
 		String sql = "SELECT * FROM administrators WHERE mail_address=:mailAddress AND password=:password ";
