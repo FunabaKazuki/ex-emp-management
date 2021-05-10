@@ -1,8 +1,11 @@
 package jp.co.sample.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,7 +24,10 @@ import jp.co.sample.service.AdministratorService;
 public class AdministratorController {
 	
 	@Autowired
-	private AdministratorService adoAdministratorService;
+	private AdministratorService AdministratorService;
+	
+	@Autowired
+	private HttpSession session;
 	
 	/**
 	 * InsertAdministratorForm　をインスタンス化するメソッド
@@ -49,6 +55,26 @@ public class AdministratorController {
 		return "administrator/login.html";
 	}
 	
+	/**
+	 * 入力情報からログインを行うメソッド
+	 * @param loginForm
+	 * @param model
+	 * @return forward:/employee/showList
+	 */
+	@RequestMapping ("/login")
+	public String login(LoginForm loginForm, Model model) {
+		Administrator administrator = AdministratorService.login(loginForm.getMailAddress(), loginForm.getPassword());
+		if(administrator==null) {
+			model.addAttribute("msg", "メールアドレスまたはパスワードが不正です。");
+			return "administrator/login.html" ;
+		}
+		session.setAttribute("administratorName", administrator.getName());
+		return "forward:/employee/showList";
+	
+	}
+	
+	
+	
 	
 	/**
 	 * 「administrator/insert.html」にフォワードするメソッド
@@ -67,7 +93,7 @@ public class AdministratorController {
 	public String insert(InsertAdministratorForm insertAdministratorForm ) {
 		Administrator administrator = new Administrator();
 		BeanUtils.copyProperties(insertAdministratorForm, administrator);
-		adoAdministratorService.insert(administrator);
+		AdministratorService.insert(administrator);
 		return "/";
 	}
 	
