@@ -8,7 +8,7 @@ import jp.co.sample.domain.Administrator;
 import jp.co.sample.repository.AdministratorRepository;
 
 /**
- * 管理者情報を登録する業務処理を行うメソッド
+ * 管理者情報の登録とログイン処理を行うメソッド
  * @author funaba
  *
  */
@@ -19,7 +19,23 @@ public class AdministratorService {
 	@Autowired
 	private AdministratorRepository administratorRepository;
 	
+	/**
+	 * 管理者情報を管理者テーブルに登録する
+	 * @param administrator
+	 */
 	public void insert(Administrator administrator) {
 		administratorRepository.insert(administrator);
 	}
+	
+	/**
+	 * ログイン処理のための管理者情報をメールアドレスとパスワードから検索するメソッド
+	 * @param mailAddress
+	 * @param password
+	 * @return Administrator
+	 */
+	public Administrator login(String mailAddress , String password) {
+		return administratorRepository.findByMailAddressAndPassword(mailAddress, password);
+	}
+	
+	
 }

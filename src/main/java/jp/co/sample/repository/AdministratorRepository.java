@@ -50,7 +50,7 @@ public class AdministratorRepository {
 	 * @return　administrator
 	 */
 	public Administrator findByMailAddressAndPassword(String mailAddress, String password) {
-		String sql = "SELECT * FROM administrators WHERE mail_address=:mailAddress , password=:password ";
+		String sql = "SELECT * FROM administrators WHERE mail_address=:mailAddress AND password=:password ";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress", mailAddress).addValue("password", password);
 		List<Administrator> administratorList= template.query(sql, param, ADMINISTRATOR_ROW_MAPPER);
 		if (administratorList.size() == 0) {
