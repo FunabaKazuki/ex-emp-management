@@ -15,7 +15,7 @@ import jp.co.sample.form.LoginForm;
 import jp.co.sample.service.AdministratorService;
 
 /**
- * 管理者登録画面を表示する処理を行うクラス
+ * 管理者登録画面を表示やログイン処理を行うクラス
  * @author funaba
  *
  */
