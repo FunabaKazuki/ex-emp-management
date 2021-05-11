@@ -19,6 +19,17 @@ public class UpdateEmployeeForm {
 	@NotBlank(message = "必須項目です")
 	@Pattern(message = "数字を入力しててください",regexp = "^[0-9]+$") 
 	private String dependentsCount;
+	/**
+	 * 特性
+	 */
+	@NotBlank(message = "必須項目です")
+	private String characteristics;
+	public String getCharacteristics() {
+		return characteristics;
+	}
+	public void setCharacteristics(String characteristics) {
+		this.characteristics = characteristics;
+	}
 	public String getId() {
 		return id;
 	}
@@ -33,7 +44,8 @@ public class UpdateEmployeeForm {
 	}
 	@Override
 	public String toString() {
-		return "UpdateEmployeeForm [id=" + id + ", dependentsCount=" + dependentsCount + "]";
+		return "UpdateEmployeeForm [id=" + id + ", dependentsCount=" + dependentsCount + ", characteristics="
+				+ characteristics + "]";
 	}
 	
 	
