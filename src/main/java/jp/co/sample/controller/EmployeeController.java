@@ -1,5 +1,9 @@
 package jp.co.sample.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,9 @@ import jp.co.sample.service.EmployeeService;
 public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	protected HttpSession session;
+	
 	
 	/**
 	 * 従業員情報更新用フォームをインスタンス化するメソッド
@@ -40,6 +47,19 @@ public class EmployeeController {
 	 */
 	@RequestMapping("/showList")
 	public String showList(Model model) {
+		if(session.getAttribute("administratorName")==null) {
+			return "forward:/";
+		}
+	//	List<Employee> emplist = employeeService.showList();
+	//	for(int i = 1 ; i<emplist.size()/10;i++) {
+	//		
+	//	}
+	//	List<Employee> employeeList ; 
+	//	for(int i=0;i<emplist.size();i++) {
+	//		
+	//	}
+		
+		
 		model.addAttribute("employeeList", employeeService.showList());
 		
 		return "employee/list";
@@ -47,6 +67,10 @@ public class EmployeeController {
 	
 	@RequestMapping ("/showDetail")
 	public String showDetail(String id,Model model) {
+		if(session.getAttribute("administratorName")==null) {
+			return "forward:/";
+		}
+
 		Employee employee = employeeService.showDetail(Integer.parseInt(id));
 		model.addAttribute("employee", employee);
 		return "employee/detail";

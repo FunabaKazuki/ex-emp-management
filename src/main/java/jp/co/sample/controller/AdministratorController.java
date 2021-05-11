@@ -29,7 +29,7 @@ public class AdministratorController {
 	private AdministratorService AdministratorService;
 	
 	@Autowired
-	private HttpSession session;
+	protected HttpSession session;
 	
 	/**
 	 * InsertAdministratorForm　をインスタンス化するメソッド
