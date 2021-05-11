@@ -1,5 +1,6 @@
 package jp.co.sample.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -46,21 +47,53 @@ public class EmployeeController {
 	 * @return employee/list呼び出し
 	 */
 	@RequestMapping("/showList")
-	public String showList(Model model) {
+	public String showList(Model model,Integer pageNum) {
 		if(session.getAttribute("administratorName")==null) {
 			return "forward:/";
 		}
-	//	List<Employee> emplist = employeeService.showList();
-	//	for(int i = 1 ; i<emplist.size()/10;i++) {
-	//		
-	//	}
-	//	List<Employee> employeeList ; 
-	//	for(int i=0;i<emplist.size();i++) {
-	//		
-	//	}
 		
 		
-		model.addAttribute("employeeList", employeeService.showList());
+		List<Employee> emplist = employeeService.showList();
+		int pageSize = emplist.size()/10+1;
+		if(emplist.size()%10==0) {
+			pageSize--;
+		}
+		
+		
+	       int size = 10;   
+	       Integer page = 1;
+	        for (int i = 0; i < emplist.size(); i += size) {
+	        	
+	            List<Employee> list = new ArrayList<>();
+	            list=emplist.subList(i, Math.min(i + size, emplist.size()));
+	            model.addAttribute(page.toString(), list);
+	        
+	            page++;
+	        }
+
+		if(pageNum==null||pageNum==1) {
+			model.addAttribute("employeeList",model.getAttribute("1"));
+			model.addAttribute("fromPage", 1 );
+			model.addAttribute("toPage", 2);
+			model.addAttribute("page", 1);
+			
+		}else {
+			
+			model.addAttribute("employeeList", model.getAttribute(pageNum.toString()));
+			int fromPage=pageNum-1;
+			int toPage=pageNum+1;
+			model.addAttribute("fromPage",fromPage);
+			model.addAttribute("toPage", toPage);
+			model.addAttribute("page", pageNum);
+			if(pageNum==pageSize) {
+				model.addAttribute("toPage", pageNum);
+			}
+		
+		}
+		
+		
+		
+		//model.addAttribute("employeeList", employeeService.showList());
 		
 		return "employee/list";
 	}
