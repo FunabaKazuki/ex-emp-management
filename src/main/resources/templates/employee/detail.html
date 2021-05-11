@@ -14,8 +14,8 @@
 </head>
 <body>
 	<div class="container">
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
+		<nav class="navbar navbar-default" >
+			<div class="container-fluid" th:fragment="emp_header">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed"
@@ -147,7 +147,12 @@
 							      特性
 							    </th>
 							    <td>
-							      <span th:text="${employee.characteristics}">明るく素直な性格です。リーダーシップを発揮します。新卒社員研修の時はグループ開発の時にリーダーを買ってでました。積極性も人間性も抜群です。周りに対する不満も聞いたことがありません。</span>
+
+							      <span th:text="${employee.characteristics}">明るく素直な性格です。リーダーシップを発揮します。新卒社員研修の時はグループ開発の時にリーダーを買ってでました。積極性も人間性も抜群です。周りに対する不満も聞いたことがありません。</span><br>
+							        <label class="error-messages"　th:errors="*{characteristics}">
+									
+									</label>
+							      <textarea cols="25" rows="5" name="characteristics" id="characteristics" class="form-control" value="3" th:text="${employee.characteristics}"></textarea>
 							    </td>
 							  </tr>
 							  <tr>
@@ -155,7 +160,8 @@
 							      扶養人数
 							    </th>
 							    <td>
-							    	<label class="error-messages">
+							    <span th:text="${employee.dependentsCount}"></span><br>
+							    	<label class="error-messages"　th:errors="*{dependentsCount}">
 											扶養人数を入力してください
 									</label>
 									<label class="control-label" style="color: red" for="dependentsCount"></label>

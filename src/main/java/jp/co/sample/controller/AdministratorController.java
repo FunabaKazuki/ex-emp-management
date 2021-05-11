@@ -6,6 +6,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,7 +29,7 @@ public class AdministratorController {
 	private AdministratorService AdministratorService;
 	
 	@Autowired
-	private HttpSession session;
+	protected HttpSession session;
 	
 	/**
 	 * InsertAdministratorForm　をインスタンス化するメソッド
@@ -90,7 +92,10 @@ public class AdministratorController {
 	 * @return　「/」　(ログイン画面)にリダイレクトする
 	 */
 	@RequestMapping ("/insert")
-	public String insert(InsertAdministratorForm insertAdministratorForm ) {
+	public String insert(@Validated InsertAdministratorForm insertAdministratorForm ,BindingResult result) {
+		if(result.hasErrors()) {
+			return toInsert();
+		}
 		Administrator administrator = new Administrator();
 		BeanUtils.copyProperties(insertAdministratorForm, administrator);
 		AdministratorService.insert(administrator);
