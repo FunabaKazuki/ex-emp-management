@@ -155,10 +155,9 @@
 							      扶養人数
 							    </th>
 							    <td>
-							    	<label class="error-messages">
+							    	<label class="error-messages"　th:errors="*{dependentsCount}">
 											扶養人数を入力してください
 									</label>
-									<div th:errors="*{dependentsCount}" style="color:red">エラー</div>
 									<label class="control-label" style="color: red" for="dependentsCount"></label>
 									<input type="hidden" name="id" th:value="${employee.id}">
 									<input type="text" name="dependentsCount" id="dependentsCount" class="form-control" value="3" th:value="${employee.dependentsCount}">
